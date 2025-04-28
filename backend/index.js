@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const router = express.Router();
 const menu = require("./routes/menu");
 const port = 3000;
 

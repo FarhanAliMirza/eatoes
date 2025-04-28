@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
-const { MONGODB_URI } = require("./config");
+const dotenv = require('dotenv').config()
 
+const MONGODB_URI = dotenv.parsed.MONGODB_URI;
 mongoose.connect(MONGODB_URI);
 const menuItemSchema = new mongoose.Schema({
   name: { type: String, required: true },
