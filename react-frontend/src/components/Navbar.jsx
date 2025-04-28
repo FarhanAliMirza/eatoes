@@ -31,7 +31,7 @@ const Navbar = () => {
     //   </div>
     // </nav>
     <div className="bg-[#FFF8F1] shadow-md p-4 flex justify-between items-center">
-      <div className="text-2xl font-bold text-[#FF7F11]">eatos</div>
+      <div className="text-2xl font-bold text-[#FF7F11]">eatoes</div>
       <div className="flex space-x-6 items-center">
         <a
           href="/"
