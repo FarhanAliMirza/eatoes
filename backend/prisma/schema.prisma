@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String   @unique
+  password  String
+  orders    Order[]  @relation("UserOrders")
+  createdAt DateTime @default(now())
+}
+
+model Order {
+  id          String       @id @default(cuid())
+  phone       String       // Customer's phone number (required for both guests and registered users)
+  totalAmount Float
+  createdAt   DateTime     @default(now())
+  items       OrderItem[]
+  userId      String?      // Nullable for guest checkout
+  user        User?        @relation("UserOrders", fields: [userId], references: [id])
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  itemName  String
+  price     Float
+  quantity  Int
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id])
+}

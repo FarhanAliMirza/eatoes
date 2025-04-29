@@ -1,0 +1,60 @@
+[
+
+    {
+      "name": "Garlic Butter Fries",
+      "description": "Crispy fries tossed in garlic butter and fresh parsley.",
+      "price": 149,
+      "category": "Appetizer",
+      "imageUrl": "https://images.unsplash.com/photo-1586190848861-99aa4a171e90",
+      "isAvailable": true
+    },
+    {
+      "name": "Chocolate Lava Cake",
+      "description": "Rich molten chocolate cake served with a scoop of vanilla ice cream.",
+      "price": 199,
+      "category": "Dessert",
+      "imageUrl": "https://images.unsplash.com/photo-1599785209707-28b443cb48dc",
+      "isAvailable": true
+    },
+    {
+      "name": "Fresh Lemonade",
+      "description": "Refreshing lemonade made with fresh lemons and a hint of mint.",
+      "price": 99,
+      "category": "Drink",
+      "imageUrl": "https://images.unsplash.com/photo-1558640476-4b2b5af19b08",
+      "isAvailable": true
+    },
+    {
+      "name": "Veggie Supreme Pizza",
+      "description": "Loaded with bell peppers, olives, onions, and mozzarella cheese.",
+      "price": 499,
+      "category": "Main Course",
+      "imageUrl": "https://images.unsplash.com/photo-1601924928313-0663b84756d7",
+      "isAvailable": true
+    },
+    {
+      "name": "Mozzarella Sticks",
+      "description": "Crispy fried mozzarella sticks served with marinara sauce.",
+      "price": 179,
+      "category": "Appetizer",
+      "imageUrl": "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
+      "isAvailable": true
+    },
+    {
+      "name": "Tiramisu",
+      "description": "Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone.",
+      "price": 249,
+      "category": "Dessert",
+      "imageUrl": "https://images.unsplash.com/photo-1613145991743-cc3e85f43ba1",
+      "isAvailable": true
+    },
+    {
+      "name": "Iced Coffee",
+      "description": "Chilled coffee beverage with a hint of vanilla.",
+      "price": 129,
+      "category": "Drink",
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348",
+      "isAvailable": true
+    }
+  ]
+  
