@@ -149,7 +149,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/fam/Documents/Programs/freelance/eatos/backend/generated/prisma",
+      "value": "/Users/fam/Documents/Programs/freelance/eatoes/backend/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -163,7 +163,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/fam/Documents/Programs/freelance/eatos/backend/prisma/schema.prisma",
+    "sourceFilePath": "/Users/fam/Documents/Programs/freelance/eatoes/backend/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
