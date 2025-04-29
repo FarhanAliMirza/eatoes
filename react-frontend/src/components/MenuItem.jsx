@@ -1,6 +1,33 @@
 import Button from "./Button";
+import { useContext } from "react";
+import { StoreContext } from "../context/storeContext";
+import { Plus, Minus } from "lucide-react";
+
+const CountButton = ({ count, itemName }) => {
+  const { addToCart, removeFromCart } = useContext(StoreContext);
+
+  return (
+    <div className="flex items-center justify-between gap-2 bg-[#FFF8F1] ">
+      <button
+        className={`bg-[#FF7F11] text-white hover:bg-[#FFB347] p-1 rounded-md`}
+        onClick={() => removeFromCart(itemName)}
+      >
+        <Minus />
+      </button>
+      {count}
+      <button
+        className={`bg-[#FF7F11] text-white hover:bg-[#FFB347] p-1 rounded-md`}
+        onClick={() => addToCart(itemName)}
+      >
+        <Plus />
+      </button>
+    </div>
+  );
+};
 
 const MenuItem = ({ item }) => {
+  const { cartItems, addToCart} = useContext(StoreContext);
+
   return (
     <div className="flex flex-col gap-4 p-4 border rounded-lg shadow-md hover:shadow-lg hover:bg-[#FFF8F1] transition-shadow duration-300 bg-white">
       <img
@@ -20,9 +47,13 @@ const MenuItem = ({ item }) => {
           <span className="text-lg font-bold text-orange-500">
             ₹{item.price}
           </span>
-          <Button disabled={!item.isAvailable}>
-            {item.isAvailable ? "Add to Cart" : "Unavailable"}
-          </Button>
+          {!cartItems[item.name] ? (
+            <Button disabled={!item.isAvailable} onClick={() => addToCart(item.name)}>
+              {item.isAvailable ? "Add to Cart" : "Unavailable"}
+            </Button>
+          ) : (
+            <CountButton count={cartItems[item.name]} itemName={item.name} />
+          )}
         </div>
       </div>
     </div>
