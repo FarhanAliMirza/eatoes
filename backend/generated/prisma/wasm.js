@@ -138,7 +138,7 @@ exports.Prisma.OrderScalarFieldEnum = {
 
 exports.Prisma.OrderItemScalarFieldEnum = {
   id: 'id',
-  itemName: 'itemName',
+  name: 'name',
   price: 'price',
   quantity: 'quantity',
   orderId: 'orderId'
