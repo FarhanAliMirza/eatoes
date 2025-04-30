@@ -1,21 +1,53 @@
 import { useState, useContext } from "react";
 import CartItem from "./CartItem";
 import { StoreContext } from "../context/storeContext";
-
+import axios from "axios";
 import { ShoppingBasket } from "lucide-react";
 
 const CartModal = () => {
   const { cartItems } = useContext(StoreContext);
+  const [loading, setLoading] = useState(false);
   const [showCart, setShowCart] = useState(false);
+  const [number, setNumber] = useState(0);
+  const notLoggedIn = localStorage.getItem("token") == null;
   const total = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
+  const handleChange = (e) => {
+    setNumber(e.target.value);
+  };
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    if (notLoggedIn) {
+      if (number.length < 10) {
+        alert("Please enter a valid phone number");
+        return;
+      }
+      // const response = await axios.post(
+      //   `https://eatoes-production.up.railway.app/api/order`,
+      //   {
+      //     phone: number,
+          
+      //   }
+      // );
+      const orderPayload = {
+        number,
+        items: cartItems,
+        totalAmount: total,
+      };
+      
+      console.log(orderPayload)
+    }
+  };
 
   return (
     <>
       <button
-        className="text-[#333333] hover:text-[#FF7F11] font-medium transition-colors duration-300"
+        className={`${
+          cartItems.length === 0 ? "text-[#333333]" : "text-[#FFB347]"
+        } hover:text-[#FF7F11] font-medium transition-colors duration-300`}
         onClick={() => setShowCart(true)}
       >
         <ShoppingBasket />
@@ -32,7 +64,13 @@ const CartModal = () => {
             </button>
 
             <h2 className="text-xl font-bold mb-4">Your Cart</h2>
-
+            {notLoggedIn && <input
+              type="tel"
+              name="phone"
+              placeholder="Phone Number"
+              onChange={handleChange}
+              className="border w-full p-2 mb-2 rounded"
+            />}
             {cartItems.length === 0 ? (
               <p className="text-gray-500">Your cart is empty.</p>
             ) : (
@@ -49,7 +87,7 @@ const CartModal = () => {
                 </div>
 
                 <button
-                  onClick={() => console.log("checkout")}
+                  onClick={handleCheckout}
                   className="mt-6 w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition"
                 >
                   Proceed to Checkout
