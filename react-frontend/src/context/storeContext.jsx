@@ -1,38 +1,67 @@
-import {createContext, useState, useEffect} from 'react';
-import axios from 'axios';
+import { createContext, useState, useEffect } from "react";
+import axios from "axios";
 
-export const StoreContext = createContext({menuItems: [], cartItems: []});
+export const StoreContext = createContext({ menuItems: [], cartItems: [] });
 
 const StoreContextProvider = (props) => {
-    const [cartItems, setCartItems] = useState([]);
-    const [menuItems, setMenuItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const [menuItems, setMenuItems] = useState([]);
+  useEffect(() => {
+    const fetchMenuItems = async () => {
+      const response = await axios.get(
+        `https://eatoes-production.up.railway.app/api/menu`
+      );
+      setMenuItems(response.data);
+    };
+    fetchMenuItems();
+  }, []);
 
-    useEffect(() => {
-        const fetchMenuItems = async () => {
-            const response = await axios.get('http://localhost:3000/api/menu');
-            setMenuItems(response.data);
+  const addToCart = (item) => {
+    console.log(item);
+    setCartItems((prevCart) => {
+      const index = prevCart.findIndex(i => i.name === item.name);
+      if (index !== -1) {
+        const updated = [...prevCart];
+        updated[index] = {
+          ...updated[index],
+          quantity: updated[index].quantity + 1
         };
-        fetchMenuItems();
-    }, []);
+        return updated;
+      }
+      return [...prevCart, { name: item.name, price: item.price, quantity: 1 }];
+    });
+  };
+  
+  
 
-    const addToCart = (itemName) => {
-        if(!cartItems[itemName]){
-            setCartItems((prev)=> ({...prev, [itemName]: 1}));
-        }
-        else{
-            setCartItems((prev)=> ({...prev, [itemName]: prev[itemName] + 1}));
-        }
-    };
+  const removeFromCart = (item) => {
+    console.log(item);
+    setCartItems((prevCart) => {
+      const index = prevCart.findIndex(i => i.name === item.name);
+      if (index === -1) return prevCart;
+  
+      const updated = [...prevCart];
+      if (updated[index].quantity > 1) {
+        updated[index] = {
+          ...updated[index],
+          quantity: updated[index].quantity - 1
+        };
+      } else {
+        updated.splice(index, 1);
+      }
+      return updated;
+    });
+  };
+  
+  
 
-    const removeFromCart = (itemName) => {
-        setCartItems((prev)=> ({...prev, [itemName]: prev[itemName] - 1}));
-    };
-
-    return (
-        <StoreContext.Provider value={{menuItems, cartItems, addToCart, removeFromCart}}>
-            {props.children}
-        </StoreContext.Provider>
-    );  
+  return (
+    <StoreContext.Provider
+      value={{ menuItems, cartItems, addToCart, removeFromCart }}
+    >
+      {props.children}
+    </StoreContext.Provider>
+  );
 };
 
 export default StoreContextProvider;
