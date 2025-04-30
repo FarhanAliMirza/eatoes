@@ -176,12 +176,11 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "value": "postgresql://eatos-users_owner:npg_RAFrLE3pxN2s@ep-delicate-union-a4fu9h91-pooler.us-east-1.aws.neon.tech/eatos-users?sslmode=require"
       }
     }
   },
