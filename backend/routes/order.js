@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 const orderSchema = z.object({
   items: z.array(
     z.object({
-      itemName: z.string(),
+      name: z.string(),
       price: z.number(),
       quantity: z.number().min(1),
     })
