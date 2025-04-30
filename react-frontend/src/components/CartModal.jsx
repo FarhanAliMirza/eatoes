@@ -28,13 +28,14 @@ const CartModal = () => {
       }
 
       const orderPayload = {
-        number,
-        OrderItems: cartItems,
+        phone : number,
+        items: cartItems,
         totalAmount: total,
       };
       try {
         const response = await axios.post(
-          `https://eatoes-production.up.railway.app/api/order`,
+          // `https://eatoes-production.up.railway.app/api/order`,
+          "http://localhost:3000/api/order",
           orderPayload
         );
         console.log(response.data);
@@ -76,20 +77,20 @@ const CartModal = () => {
             </button>
 
             <h2 className="text-xl font-bold mb-4">Your Cart</h2>
-            {notLoggedIn && (
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Phone Number"
-                onChange={handleChange}
-                className="border w-full p-2 mb-2 rounded"
-              />
-            )}
             {cartItems.length === 0 ? (
               <p className="text-gray-500">Your cart is empty.</p>
             ) : (
               <>
                 <div className="space-y-4 max-h-72 overflow-y-auto">
+                  {notLoggedIn && (
+                    <input
+                      type="tel"
+                      name="phone"
+                      placeholder="Phone Number"
+                      onChange={handleChange}
+                      className="border w-full p-2 mb-2 rounded"
+                    />
+                  )}
                   {cartItems.map((item, index) => (
                     <CartItem key={index} item={item} />
                   ))}
