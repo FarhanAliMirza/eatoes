@@ -35,7 +35,7 @@ const AuthModal = ({
             password: form.password,
           }
         );
-        localStorage.setItem("token", `Bearer ${response.data.token}`);
+        localStorage.setItem("token",response.data.token);
         setShowAuthModal(false);
         alert("Login Successful");
         navigate(0);
@@ -52,7 +52,7 @@ const AuthModal = ({
             name: form.name,
           }
         );
-        localStorage.setItem("token", `Bearer ${response.data.token}`);
+        localStorage.setItem("token",response.data.token);
         setShowAuthModal(false);
         alert("Login Successful");
         navigate(0);
