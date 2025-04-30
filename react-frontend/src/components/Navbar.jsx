@@ -1,8 +1,9 @@
-import React from "react";
-import Button from "./Button";
-import { ShoppingBasket } from "lucide-react";
+import AvatarButton from "./AvatarButton";
+import AuthModal from "./AuthModal";
+import CartModal from "./CartModal";
 
 const Navbar = () => {
+  
   return (
     <div className="bg-[#FFF8F1] shadow-md p-4 flex justify-between items-center m-2 rounded-xl">
       <div className="text-2xl font-bold text-[#FF7F11]">eatoes</div>
@@ -19,16 +20,8 @@ const Navbar = () => {
         >
           Menu
         </a>
-        <a
-          href="/"
-          className="text-[#333333] hover:text-[#FF7F11] font-medium transition-colors duration-300"
-        >
-          <ShoppingBasket />
-        </a>
-
-        <Button bgColor="#FFB347" hoverColor="#FF7F11" textColor="#333333">
-          Login
-        </Button>
+        <CartModal />
+        {localStorage.getItem("token") ? <AvatarButton /> : <AuthModal />}
       </div>
     </div>
   );

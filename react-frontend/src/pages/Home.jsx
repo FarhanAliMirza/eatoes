@@ -1,8 +1,11 @@
 import Button from "../components/Button";
 import ReviewCard from "../components/ReviewCard";
-import { Navigate } from "react-router-dom";
+import AuthModal from "../components/AuthModal";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const loggedIn = localStorage.getItem("token") === null;
+  const navigate = useNavigate();
   return (
     <div className="w-full flex flex-col min-h-screen ">
       <section
@@ -22,8 +25,12 @@ const Home = () => {
             Fresh flavors. Fast pickup. Experience dining reimagined!
           </p>
           <div className="mt-4 flex items-center justify-center gap-4">
-            <Button className="">Login</Button>
-            <Button bgColor="#f7d7b7" hoverColor="#FFB347" textColor="#333333">
+            {loggedIn && <AuthModal
+              bgColor="#FF7F11"
+              hoverColor="#FFB347"
+              textColor="#FFFFFF"
+            />}
+            <Button bgColor="#f7d7b7" hoverColor="#FFB347" textColor="#333333" onClick={()=> navigate("/menu")}>
               View Menu
             </Button>
           </div>
