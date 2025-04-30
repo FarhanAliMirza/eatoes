@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import Button from "./Button";
 import CartItem from "./CartItem";
 import { StoreContext } from "../context/storeContext";
 import axios from "axios";
@@ -25,21 +26,32 @@ const CartModal = () => {
         alert("Please enter a valid phone number");
         return;
       }
-      // const response = await axios.post(
-      //   `https://eatoes-production.up.railway.app/api/order`,
-      //   {
-      //     phone: number,
-          
-      //   }
-      // );
+
       const orderPayload = {
         number,
-        items: cartItems,
+        OrderItems: cartItems,
         totalAmount: total,
       };
-      
-      console.log(orderPayload)
+      try {
+        const response = await axios.post(
+          `https://eatoes-production.up.railway.app/api/order`,
+          orderPayload
+        );
+        console.log(response.data);
+        alert("Order Successful");
+      } catch (e) {
+        console.log(e);
+      }
+
+      console.log(orderPayload);
+    } else {
+      const orderPayload = {
+        OrderItems: cartItems,
+        totalAmount: total,
+      };
+      console.log(orderPayload);
     }
+    setLoading(false);
   };
 
   return (
@@ -64,13 +76,15 @@ const CartModal = () => {
             </button>
 
             <h2 className="text-xl font-bold mb-4">Your Cart</h2>
-            {notLoggedIn && <input
-              type="tel"
-              name="phone"
-              placeholder="Phone Number"
-              onChange={handleChange}
-              className="border w-full p-2 mb-2 rounded"
-            />}
+            {notLoggedIn && (
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone Number"
+                onChange={handleChange}
+                className="border w-full p-2 mb-2 rounded"
+              />
+            )}
             {cartItems.length === 0 ? (
               <p className="text-gray-500">Your cart is empty.</p>
             ) : (
@@ -86,12 +100,13 @@ const CartModal = () => {
                   <span className="font-bold text-lg">₹{total.toFixed(2)}</span>
                 </div>
 
-                <button
+                <Button
                   onClick={handleCheckout}
-                  className="mt-6 w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition"
+                  className="mt-6 w-full"
+                  loading={loading}
                 >
                   Proceed to Checkout
-                </button>
+                </Button>
               </>
             )}
           </div>
