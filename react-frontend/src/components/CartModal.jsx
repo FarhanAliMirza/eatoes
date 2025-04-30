@@ -34,12 +34,9 @@ const CartModal = () => {
       };
       try {
         const response = await axios.post(
-          `https://eatoes-production.up.railway.app/api/order`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          },
-          orderPayload
+          `https://eatoes-production.up.railway.app/api/order`
         );
+        orderPayload;
         alert("Order Successful");
       } catch (e) {
         console.log(e);
@@ -48,13 +45,18 @@ const CartModal = () => {
       console.log(orderPayload);
     } else {
       const orderPayload = {
-        OrderItems: cartItems,
+        items: cartItems,
         totalAmount: total,
       };
       try {
         const response = await axios.post(
           `https://eatoes-production.up.railway.app/api/order`,
-          orderPayload
+          orderPayload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
         );
         alert("Order Successful");
       } catch (e) {

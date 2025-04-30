@@ -21,7 +21,6 @@ const orderSchema = z.object({
 router.post("/", async (req, res) => {
   const token = req.headers.authorization?.split(" ")[1];
   let userPhone = null;
-
   if (token) {
     try {
       const decoded = require("jsonwebtoken").verify(
@@ -29,6 +28,7 @@ router.post("/", async (req, res) => {
         process.env.JWT_SECRET
       );
       userPhone = decoded.phone;
+      console.log(userPhone);
     } catch (err) {
       // Invalid token → treat as guest
       console.log("Invalid JWT, continuing as guest.");
@@ -41,6 +41,7 @@ router.post("/", async (req, res) => {
     if (userPhone) {
       phoneNumber = userPhone;
     }
+
 
     const order = await prisma.order.create({
       data: {
