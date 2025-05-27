@@ -12,6 +12,8 @@ const AuthModal = ({
   const [isLogin, setIsLogin] = useState(true);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const url = "http://localhost:3000/api/auth/signin";
+  // const url = "https://eatoes-production.up.railway.app/api/auth/signin";
   const navigate = useNavigate();
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -29,7 +31,7 @@ const AuthModal = ({
     else if (isLogin) {
       try {
         const response = await axios.post(
-          `https://eatoes-production.up.railway.app/api/auth/signin`,
+          `${url}`,
           {
             phone: form.phone,
             password: form.password,

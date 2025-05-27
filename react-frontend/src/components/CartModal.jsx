@@ -10,6 +10,8 @@ const CartModal = () => {
   const [loading, setLoading] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [number, setNumber] = useState(0);
+  const url = "http://localhost:3000/api/order";
+  // const url = "https://eatoes-production.up.railway.app/api/order";
   const notLoggedIn = localStorage.getItem("token") == null;
   const total = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -34,7 +36,7 @@ const CartModal = () => {
       };
       try {
         const response = await axios.post(
-          `https://eatoes-production.up.railway.app/api/order`
+          `${url}`
         );
         orderPayload;
         alert("Order Successful");
@@ -50,7 +52,7 @@ const CartModal = () => {
       };
       try {
         const response = await axios.post(
-          `https://eatoes-production.up.railway.app/api/order`,
+          `${url}`,
           orderPayload,
           {
             headers: {

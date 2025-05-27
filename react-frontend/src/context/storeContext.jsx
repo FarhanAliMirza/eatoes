@@ -3,13 +3,16 @@ import axios from "axios";
 
 export const StoreContext = createContext({ menuItems: [], cartItems: [] });
 
+
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
+  const url = "http://localhost:3000/api/menu";
+  // const url = "https://eatoes-production.up.railway.app/api/menu";
   useEffect(() => {
     const fetchMenuItems = async () => {
       const response = await axios.get(
-        `https://eatoes-production.up.railway.app/api/menu`
+        `${url}`
       );
       setMenuItems(response.data);
     };
