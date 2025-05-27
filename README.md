@@ -88,6 +88,7 @@ cd eatoes
 ```
 
 ### 2. Setup Backend
+ Create a .env file in the backend folder and add the secrets ( given at the end of this README.md )
 ```bash
 cd backend
 npm install
@@ -116,4 +117,10 @@ npm run dev
 - User creation is optional during order placement.
 
 ---
+
+## 🔑 Secrets
+
+- MONGODB_URI="mongodb+srv://farhanalimirza19:AUZg3TVKh8X5w4mL@menuitems.egotvd6.mongodb.net/?retryWrites=true&w=majority&appName=menuitems"
+- DATABASE_URL="postgresql://eatos-users_owner:npg_RAFrLE3pxN2s@ep-delicate-union-a4fu9h91-pooler.us-east-1.aws.neon.tech/eatos-users?sslmode=require"
+- JWT_SECRET="fam"
 
